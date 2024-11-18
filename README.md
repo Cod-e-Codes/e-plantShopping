@@ -57,27 +57,6 @@ A sleek, responsive, and interactive plant shopping web application built with *
 
 ---
 
-## File Structure 📂
-   ```php
-   e-plantShopping/
-   ├── src/
-   │   ├── components/
-   │   │   ├── ProductList.jsx  # Main product listing component
-   │   │   ├── CartItem.jsx     # Cart interface component
-   │   ├── store/
-   │   │   └── CartSlice.js     # Redux state slice for cart management
-   │   ├── App.jsx              # Main app component
-   │   ├── main.jsx             # Entry point with Redux provider
-   │   ├── index.css            # Global styles
-   ├── public/
-   │   └── vite.svg             # Static assets
-   ├── package.json             # Project dependencies and scripts
-   ├── vite.config.js           # Vite configuration
-   ├── README.md                # Project documentation
-   ```
-
----
-
 ## Usage Instructions 🛍️
 
 - **Browse Categories**: Navigate through the categorized plants on the home page.

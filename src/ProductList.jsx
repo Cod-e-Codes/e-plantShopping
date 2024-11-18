@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
 import CartItem from './CartItem';
 
-function ProductList() {
+function ProductList({ onNavigate }) { // Accept onNavigate as a prop
     const [showCart, setShowCart] = useState(false);
     const dispatch = useDispatch();
 
@@ -88,7 +88,7 @@ function ProductList() {
         <div>
             {/* Navbar */}
             <div className="navbar">
-                {/* Left Section: Logo */}
+                {/* Left Section */}
                 <div className="navbar-section luxury">
                     <img
                         src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png"
@@ -96,11 +96,11 @@ function ProductList() {
                         className="navbar-logo"
                     />
                     <a
-                        href="#"
+                        href="#landing"
                         className="navbar-link"
                         onClick={(e) => {
                             e.preventDefault();
-                            onNavigate('landing'); // Navigate to landing page
+                            onNavigate('landing'); // Navigate back to the landing page
                         }}
                     >
                         <div>
@@ -110,23 +110,25 @@ function ProductList() {
                     </a>
                 </div>
 
-                {/* Center Section: Plants Link */}
+                {/* Center Section */}
                 <div className="navbar-section">
                     <a
                         href="#plants"
                         className="navbar-link"
                         onClick={(e) => {
                             e.preventDefault();
-                            setShowCart(false); // Hide cart
+                            setShowCart(false);
+                            onNavigate('products'); // Navigate to products
                         }}
                     >
                         Plants
                     </a>
                 </div>
 
-                {/* Right Section: Cart Icon */}
+                {/* Right Section */}
                 <div className="navbar-section cart" onClick={handleCartClick}>
                     <div className="cart-container">
+                        {/* Shopping Cart Icon */}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 256 256"
@@ -145,14 +147,11 @@ function ProductList() {
                                 strokeWidth="2"
                             ></path>
                         </svg>
-                        {totalCartItems > 0 && (
-                            <span className="cart-count">{totalCartItems}</span>
-                        )}
+                        {totalCartItems > 0 && <span className="cart-count">{totalCartItems}</span>}
                     </div>
                 </div>
             </div>
 
-            {/* Product Grid */}
             {!showCart ? (
                 <div className="product-grid">
                     {plantsArray.map((category, index) => (
@@ -161,11 +160,7 @@ function ProductList() {
                             <div className="product-list">
                                 {category.plants.map((plant) => (
                                     <div key={plant.name} className="product-card">
-                                        <img
-                                            src={plant.image}
-                                            alt={plant.name}
-                                            className="product-image"
-                                        />
+                                        <img src={plant.image} alt={plant.name} className="product-image" />
                                         <h3 className="product-title">{plant.name}</h3>
                                         <p className="product-description">{plant.description}</p>
                                         <p className="product-price">{plant.cost}</p>
@@ -175,9 +170,7 @@ function ProductList() {
                                             onClick={() => handleAddToCart(plant)}
                                             disabled={isPlantInCart(plant.name)}
                                         >
-                                            {isPlantInCart(plant.name)
-                                                ? 'Added to Cart'
-                                                : 'Add to Cart'}
+                                            {isPlantInCart(plant.name) ? 'Added to Cart' : 'Add to Cart'}
                                         </button>
                                     </div>
                                 ))}

@@ -4,66 +4,78 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
 import CartItem from './CartItem';
 
-function ProductList({ onNavigate }) { // Accept onNavigate as a prop
-    const [showCart, setShowCart] = useState(false);
+function ProductList({ onNavigate }) {
+    const [view, setView] = useState('products'); // 'products' or 'cart'
     const dispatch = useDispatch();
 
     // Access Redux state for cart items
     const cartItems = useSelector((state) => state.cart?.items || []);
-    const totalCartItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+    const totalCartItems = cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
 
     const plantsArray = [
         {
-            category: "Air Purifying Plants",
+            category: 'Air Purifying Plants',
             plants: [
                 {
-                    name: "Snake Plant",
-                    image: "https://cdn.pixabay.com/photo/2021/01/22/06/04/snake-plant-5939187_1280.jpg",
-                    description: "Produces oxygen at night, improving air quality.",
-                    cost: "$15"
+                    name: 'Snake Plant',
+                    image:
+                        'https://cdn.pixabay.com/photo/2021/01/22/06/04/snake-plant-5939187_1280.jpg',
+                    description:
+                        'Produces oxygen at night, improving air quality.',
+                    cost: '$15',
                 },
                 {
-                    name: "Spider Plant",
-                    image: "https://cdn.pixabay.com/photo/2018/07/11/06/47/chlorophytum-3530413_1280.jpg",
-                    description: "Filters formaldehyde and xylene from the air.",
-                    cost: "$12"
+                    name: 'Spider Plant',
+                    image:
+                        'https://cdn.pixabay.com/photo/2018/07/11/06/47/chlorophytum-3530413_1280.jpg',
+                    description:
+                        'Filters formaldehyde and xylene from the air.',
+                    cost: '$12',
                 },
                 {
-                    name: "Peace Lily",
-                    image: "https://cdn.pixabay.com/photo/2019/06/12/14/14/peace-lilies-4269365_1280.jpg",
-                    description: "Removes mold spores and purifies the air.",
-                    cost: "$18"
-                }
-            ]
+                    name: 'Peace Lily',
+                    image:
+                        'https://cdn.pixabay.com/photo/2019/06/12/14/14/peace-lilies-4269365_1280.jpg',
+                    description: 'Removes mold spores and purifies the air.',
+                    cost: '$18',
+                },
+            ],
         },
         {
-            category: "Aromatic Plants",
+            category: 'Aromatic Plants',
             plants: [
                 {
-                    name: "Lavender",
-                    image: "https://images.unsplash.com/photo-1611909023032-2d6b3134ecba?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                    description: "Calming scent, used in aromatherapy.",
-                    cost: "$20"
+                    name: 'Lavender',
+                    image:
+                        'https://images.unsplash.com/photo-1611909023032-2d6b3134ecba?q=80&w=1074&auto=format&fit=crop',
+                    description: 'Calming scent, used in aromatherapy.',
+                    cost: '$20',
                 },
                 {
-                    name: "Jasmine",
-                    image: "https://cdn.pixabay.com/photo/2023/06/04/12/32/jasmine-8039559_960_720.jpg",
-                    description: "Known for its sweet and romantic fragrance.",
-                    cost: "$15"
-                }
-            ]
+                    name: 'Jasmine',
+                    image:
+                        'https://cdn.pixabay.com/photo/2023/06/04/12/32/jasmine-8039559_960_720.jpg',
+                    description:
+                        'Known for its sweet and romantic fragrance.',
+                    cost: '$15',
+                },
+            ],
         },
         {
-            category: "Culinary and Medicinal Plants",
+            category: 'Culinary and Medicinal Plants',
             plants: [
                 {
-                    name: "Mint",
-                    image: "https://cdn.pixabay.com/photo/2017/07/12/12/23/peppermint-2496773_1280.jpg",
-                    description: "Refreshing aroma, used in teas and cooking.",
-                    cost: "$10"
-                }
-            ]
-        }
+                    name: 'Mint',
+                    image:
+                        'https://cdn.pixabay.com/photo/2017/07/12/12/23/peppermint-2496773_1280.jpg',
+                    description: 'Refreshing aroma, used in teas and cooking.',
+                    cost: '$10',
+                },
+            ],
+        },
     ];
 
     const handleAddToCart = (plant) => {
@@ -72,12 +84,12 @@ function ProductList({ onNavigate }) { // Accept onNavigate as a prop
 
     const handleCartClick = (e) => {
         e.preventDefault();
-        setShowCart(true);
+        setView('cart');
     };
 
     const handleContinueShopping = (e) => {
         e.preventDefault();
-        setShowCart(false);
+        setView('products');
     };
 
     const isPlantInCart = (plantName) => {
@@ -85,7 +97,7 @@ function ProductList({ onNavigate }) { // Accept onNavigate as a prop
     };
 
     return (
-        <div>
+        <div className="product-list-wrapper">
             {/* Navbar */}
             <div className="navbar">
                 {/* Left Section */}
@@ -105,7 +117,9 @@ function ProductList({ onNavigate }) { // Accept onNavigate as a prop
                     >
                         <div>
                             <h3 className="navbar-title">Paradise Nursery</h3>
-                            <i className="navbar-subtitle">Where Green Meets Serenity</i>
+                            <i className="navbar-subtitle">
+                                Where Green Meets Serenity
+                            </i>
                         </div>
                     </a>
                 </div>
@@ -117,8 +131,7 @@ function ProductList({ onNavigate }) { // Accept onNavigate as a prop
                         className="navbar-link"
                         onClick={(e) => {
                             e.preventDefault();
-                            setShowCart(false);
-                            onNavigate('products'); // Navigate to products
+                            setView('products');
                         }}
                     >
                         Plants
@@ -126,7 +139,10 @@ function ProductList({ onNavigate }) { // Accept onNavigate as a prop
                 </div>
 
                 {/* Right Section */}
-                <div className="navbar-section cart" onClick={handleCartClick}>
+                <div
+                    className="navbar-section cart"
+                    onClick={handleCartClick}
+                >
                     <div className="cart-container">
                         {/* Shopping Cart Icon */}
                         <svg
@@ -147,40 +163,80 @@ function ProductList({ onNavigate }) { // Accept onNavigate as a prop
                                 strokeWidth="2"
                             ></path>
                         </svg>
-                        {totalCartItems > 0 && <span className="cart-count">{totalCartItems}</span>}
+                        {totalCartItems > 0 && (
+                            <span className="cart-count">
+                                {totalCartItems}
+                            </span>
+                        )}
                     </div>
                 </div>
             </div>
 
-            {!showCart ? (
-                <div className="product-grid">
-                    {plantsArray.map((category, index) => (
-                        <div key={index} className="product-list">
-                            <h2 className="plant-heading">{category.category}</h2>
-                            <div className="product-list">
-                                {category.plants.map((plant) => (
-                                    <div key={plant.name} className="product-card">
-                                        <img src={plant.image} alt={plant.name} className="product-image" />
-                                        <h3 className="product-title">{plant.name}</h3>
-                                        <p className="product-description">{plant.description}</p>
-                                        <p className="product-price">{plant.cost}</p>
-                                        <button
-                                            className={`product-button ${isPlantInCart(plant.name) ? 'added-to-cart' : ''
-                                                }`}
-                                            onClick={() => handleAddToCart(plant)}
-                                            disabled={isPlantInCart(plant.name)}
+            {/* Content Area */}
+            <div className="content-area">
+                {/* Products View */}
+                <div
+                    className={`products-view ${view === 'products' ? 'visible' : ''
+                        }`}
+                >
+                    <div className="product-grid">
+                        {plantsArray.map((category, index) => (
+                            <div key={index} className="product-list">
+                                <h2 className="plant-heading">
+                                    {category.category}
+                                </h2>
+                                <div className="product-list">
+                                    {category.plants.map((plant) => (
+                                        <div
+                                            key={plant.name}
+                                            className="product-card"
                                         >
-                                            {isPlantInCart(plant.name) ? 'Added to Cart' : 'Add to Cart'}
-                                        </button>
-                                    </div>
-                                ))}
+                                            <img
+                                                src={plant.image}
+                                                alt={plant.name}
+                                                className="product-image"
+                                            />
+                                            <h3 className="product-title">
+                                                {plant.name}
+                                            </h3>
+                                            <p className="product-description">
+                                                {plant.description}
+                                            </p>
+                                            <p className="product-price">
+                                                {plant.cost}
+                                            </p>
+                                            <button
+                                                className={`product-button ${isPlantInCart(plant.name)
+                                                    ? 'added-to-cart'
+                                                    : ''
+                                                    }`}
+                                                onClick={() =>
+                                                    handleAddToCart(plant)
+                                                }
+                                                disabled={isPlantInCart(
+                                                    plant.name
+                                                )}
+                                            >
+                                                {isPlantInCart(plant.name)
+                                                    ? 'Added to Cart'
+                                                    : 'Add to Cart'}
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            ) : (
-                <CartItem onContinueShopping={handleContinueShopping} />
-            )}
+
+                {/* Cart View */}
+                <div
+                    className={`cart-view ${view === 'cart' ? 'visible' : ''
+                        }`}
+                >
+                    <CartItem onContinueShopping={handleContinueShopping} />
+                </div>
+            </div>
         </div>
     );
 }

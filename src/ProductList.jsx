@@ -37,7 +37,7 @@ function ProductList() {
             ]
         },
         {
-            category: "Aromatic Fragrant Plants",
+            category: "Aromatic Plants",
             plants: [
                 {
                     name: "Lavender",
@@ -50,7 +50,12 @@ function ProductList() {
                     image: "https://cdn.pixabay.com/photo/2023/06/04/12/32/jasmine-8039559_960_720.jpg",
                     description: "Known for its sweet and romantic fragrance.",
                     cost: "$15"
-                },
+                }
+            ]
+        },
+        {
+            category: "Culinary and Medicinal Plants",
+            plants: [
                 {
                     name: "Mint",
                     image: "https://cdn.pixabay.com/photo/2017/07/12/12/23/peppermint-2496773_1280.jpg",

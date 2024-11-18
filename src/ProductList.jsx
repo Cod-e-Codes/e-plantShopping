@@ -28,7 +28,13 @@ function ProductList() {
                     description: "Filters formaldehyde and xylene from the air.",
                     cost: "$12"
                 },
-            ],
+                {
+                    name: "Peace Lily",
+                    image: "https://cdn.pixabay.com/photo/2019/06/12/14/14/peace-lilies-4269365_1280.jpg",
+                    description: "Removes mold spores and purifies the air.",
+                    cost: "$18"
+                }
+            ]
         },
         {
             category: "Aromatic Fragrant Plants",
@@ -39,8 +45,20 @@ function ProductList() {
                     description: "Calming scent, used in aromatherapy.",
                     cost: "$20"
                 },
-            ],
-        },
+                {
+                    name: "Jasmine",
+                    image: "https://cdn.pixabay.com/photo/2023/06/04/12/32/jasmine-8039559_960_720.jpg",
+                    description: "Known for its sweet and romantic fragrance.",
+                    cost: "$15"
+                },
+                {
+                    name: "Mint",
+                    image: "https://cdn.pixabay.com/photo/2017/07/12/12/23/peppermint-2496773_1280.jpg",
+                    description: "Refreshing aroma, used in teas and cooking.",
+                    cost: "$10"
+                }
+            ]
+        }
     ];
 
     const handleAddToCart = (plant) => {

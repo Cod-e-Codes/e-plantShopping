@@ -5,42 +5,60 @@ import AboutUs from './AboutUs';
 
 function App() {
   const [view, setView] = useState('landing'); // Manage views: 'landing', 'products', 'about'
+  const [showProductList, setShowProductList] = useState(false);
 
   const handleNavigation = (targetView) => {
-    setView(targetView); // Change the view based on the target
+    if (targetView === 'products') {
+      setShowProductList(true); // Trigger the slide-up transition
+      setTimeout(() => {
+        setView('products'); // After transition, set the view to 'products'
+      }, 500); // Match this timeout with the CSS transition duration
+    } else if (targetView === 'landing') {
+      setShowProductList(false); // Slide back down
+      setTimeout(() => {
+        setView('landing');
+      }, 500);
+    } else {
+      setView(targetView);
+    }
+  };
+
+  const handleGetStartedClick = () => {
+    handleNavigation('products');
   };
 
   return (
     <div className="app-container">
       {/* Landing Page */}
-      {view === 'landing' && (
-        <div className="landing-page">
-          <div className="background-image"></div>
-          <div className="content">
-            <div className="landing_content">
-              <h1>Welcome To Paradise Nursery</h1>
-              <div className="divider"></div>
-              <p>Where Green Meets Serenity</p>
-              <button
-                className="get-started-button"
-                onClick={() => handleNavigation('products')}
-              >
-                Get Started
-              </button>
-            </div>
-            <div className="aboutus_container">
-              <AboutUs />
-            </div>
+      <div className={`landing-page ${showProductList ? 'fade-out' : ''}`}>
+        <div className="background-image"></div>
+        <div className="content">
+          <div className="landing_content">
+            <h1>Welcome To Paradise Nursery</h1>
+            <div className="divider"></div>
+            <p>Where Green Meets Serenity</p>
+            <button
+              className="get-started-button"
+              onClick={handleGetStartedClick}
+            >
+              Get Started
+            </button>
+          </div>
+          <div className="aboutus_container">
+            <AboutUs />
           </div>
         </div>
-      )}
+      </div>
 
       {/* Product List */}
-      {view === 'products' && (
-        <div className="product-list-container visible">
+      <div
+        className={`product-list-container ${showProductList ? 'visible' : ''
+          }`}
+      >
+        {view === 'products' && (
           <ProductList onNavigate={handleNavigation} />
-        </div>
-      )}
+        )}
+      </div>
 
       {/* About Us Page */}
       {view === 'about' && (

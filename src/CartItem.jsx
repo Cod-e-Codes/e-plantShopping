@@ -48,7 +48,7 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   return (
-    <div className="cart-container">
+    <div className="cart-page-container">
       <h2 className="cart-title">Your Shopping Cart</h2>
       {cart.length > 0 ? (
         <>

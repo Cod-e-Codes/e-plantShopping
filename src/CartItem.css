@@ -1,5 +1,5 @@
-/* Cart Container */
-.cart-container {
+/* Cart Page Container */
+.cart-page-container {
   padding: 20px;
   overflow-y: auto;
   height: calc(100vh - 60px);
@@ -25,6 +25,7 @@
   padding-bottom: 10px;
   background-color: white;
   gap: 20px;
+  align-items: center;
 }
 
 .cart-item-image {
@@ -170,5 +171,9 @@
   .cart-buttons {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .cart-button {
+    width: 100%;
   }
 }
